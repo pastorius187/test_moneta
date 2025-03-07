@@ -1,0 +1,49 @@
+= Poznámky
+
+Tento dokument slouží jako vývojářské poznámky
+
+== BallDontLie
+
+Web ze kterého čerpám data pro testovací alikaci.
+
+Cílem aplikace je zobrazit seznam NBA hráčů (se jménem, příjmením, pozicí a klubem ve kterým
+hraje). Dále z detailu hráče je také možné se prokliknout na detail klubu ve kterém hraje s dostupnými informacemi.
+
+* web: https://www.balldontlie.io/
+* API KEY: 51b6581f-528e-48ef-8384-1ffc0d4506b0
+
+* popis API https://docs.balldontlie.io/#nba-api
+
+=== Autorizace
+
+BALLDONTLIE uses API keys to allow access to the API. You can obtain an API key by creating a free account at our website
+
+We expect the API key to be included in all API requests to the server in a header that looks like the following:
+
+  Authorization: YOUR_API_KEY
+
+=== Strákování
+
+This API uses cursor based pagination rather than limit/offset. Endpoints that support pagination will send back responses with a meta key that looks like what is displayed on the right.
+
+[source,json]
+----
+{
+"meta": {
+"next_cursor": 90,
+"per_page": 25
+  }
+}
+----
+
+You can use per_page to specify the maximum number of results. It defaults to 25 and doesn't allow values larger than 100.
+
+You can use next_cursor to get the next page of results. Specify it in the request parameters like this:
+
+ ?cursor=NEXT_CURSOR.
+
+
+
+
+
+

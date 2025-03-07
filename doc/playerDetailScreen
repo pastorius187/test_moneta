@@ -1,0 +1,77 @@
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun PlayerDetailScreen(player: Player) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "${player.first_name} ${player.last_name}",
+            style = MaterialTheme.typography.headlineLarge
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                PlayerInfoRow("Pozice", player.position)
+                PlayerInfoRow("Výška", player.height)
+                PlayerInfoRow("Váha", "${player.weight} lbs")
+                PlayerInfoRow("Číslo dresu", player.jersey_number)
+                PlayerInfoRow("Vysoká škola", player.college ?: "Neznámé")
+                PlayerInfoRow("Země", player.country)
+                PlayerInfoRow("Draft", "${player.draft_year}, Kolo: ${player.draft_round}, Číslo: ${player.draft_number}")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Tým", fontSize = 20.sp)
+
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                PlayerInfoRow("Název", player.team.full_name)
+                PlayerInfoRow("Konference", player.team.conference)
+                PlayerInfoRow("Divize", player.team.division)
+                PlayerInfoRow("Město", player.team.city)
+                PlayerInfoRow("Zkratka", player.team.abbreviation)
+            }
+        }
+    }
+}
+
+@Composable
+fun PlayerInfoRow(label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+    ) {
+        Text(
+            text = "$label:",
+            modifier = Modifier.weight(1f),
+            fontSize = 16.sp
+        )
+        Text(
+            text = value,
+            modifier = Modifier.weight(1f),
+            fontSize = 16.sp
+        )
+    }
+}

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MonetaTest</string>
+    <string name="title_activity_player_detail">PlayerDetailActivity</string>
+</resources>
